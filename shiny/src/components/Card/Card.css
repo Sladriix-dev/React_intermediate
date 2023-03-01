@@ -1,0 +1,10 @@
+.card_main {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.card_img {
+    height: 80px;
+    width: 80px;
+}
