@@ -5,6 +5,7 @@ import Results from './pages/Results/Results'
 import Survey from './pages/Survey/Survey'
 import Header from './components/Header/Header'
 import Error from './components/Error/Error'
+import Footer from './components/Footer/Footer'
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>
+      <Footer />
     </div>
   )
 }

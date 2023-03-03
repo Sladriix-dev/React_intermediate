@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { StyledLink } from "../../utils/style/Atoms"
+import { ThemeContext } from "../../utils/context"
 import DarkLogo from "../../assets/dark-logo.png"
+import LightLogo from "../../assets/light-logo.png"
+import { useContext } from "react"
 
 const HomeLogo = styled.img`
     height: 70px;
@@ -15,10 +18,12 @@ const NavContainer = styled.nav`
 `
 
 export default function Header() {
+    const { theme } = useContext(ThemeContext)
+
     return (
         <NavContainer>
             <Link to="/">
-                <HomeLogo src={DarkLogo} />
+                <HomeLogo src={theme === 'light' ? DarkLogo : LightLogo} />
             </Link>
             <div>
                 <StyledLink to="/">Accueil</StyledLink>
