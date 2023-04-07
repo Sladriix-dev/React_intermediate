@@ -3,6 +3,7 @@ import Card from "../../components/Card/Card"
 import styled from "styled-components"
 import colors from "../../utils/style/colors"
 import { Loader } from "../../utils/style/Atoms"
+import { useTheme } from "../../utils/hooks"
 
 const CardsContainer = styled.div`
     display: grid;
@@ -34,6 +35,7 @@ const LoaderWrapper = styled.div`
 `
 
 export default function Freelances() {
+    const { theme } = useTheme()
     const [isDataLoading, setDataLoading] = useState(false)
     const [error, setError] = useState(false)
     const [freelancersList, setFreelancersList] = useState([])
@@ -57,31 +59,31 @@ export default function Freelances() {
     }, [])
 
     if (error) {
-        return <span>Oups il y a eu un problème</span>
+        return <span data-testid="error">{error}</span>
     }
 
     return (
-        <div>
-            <PageTitle>Trouvez votre prestataire</PageTitle>
-            <PageSubtitle>
-                Chez Shiny nous réunissons les meilleurs profils pour vous.
-            </PageSubtitle>
-            {isDataLoading ? (
-                <LoaderWrapper>
-                    <Loader />
-                </LoaderWrapper>
-            ) : (
-            <CardsContainer>
-                {freelancersList.map((profile, index) => (
-                    <Card
-                        key={`${profile.name}-${index}`}
-                        label={profile.jobTitle}
-                        title={profile.name}
-                        picture={profile.picture}
-                    />
-                ))}
-            </CardsContainer>
-            )}
-        </div>
+      <div>
+        <PageTitle>Trouvez votre prestataire</PageTitle>
+        <PageSubtitle>
+          Chez Shiny nous réunissons les meilleurs profils pour vous.
+        </PageSubtitle>
+        {isDataLoading ? (
+          <LoaderWrapper>
+            <Loader theme={theme} data-testid="loader" />
+          </LoaderWrapper>
+        ) : (
+          <CardsContainer>
+            {freelancersList.map((profile, index) => (
+              <Card
+                key={`${profile.name}-${index}`}
+                label={profile.jobTitle}
+                title={profile.name}
+                picture={profile.picture}
+              />
+            ))}
+          </CardsContainer>
+        )}
+      </div>
     )
 }
